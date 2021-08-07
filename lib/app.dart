@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ],
       child: ScreenUtilInit(
           builder: () => MaterialApp(
-                title: 'Zomato Clone',
+                title: APP_NAME,
                 theme: ThemeData(
                     primarySwatch: Palette.primaryColor,
                     fontFamily: QUICKSANDS_MEDIUM),
