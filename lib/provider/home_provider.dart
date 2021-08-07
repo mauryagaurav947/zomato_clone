@@ -5,11 +5,14 @@ import 'package:zomato_clone/services/services.dart';
 class HomeProvider extends ChangeNotifier {
   List<RestaurantsDetail> _restaurants = [];
   bool _isLoading = false;
+  bool _cityHasRestaurants = false;
   SearchData _searchResult;
 
   List<RestaurantsDetail> get restaurants => _restaurants;
 
   bool get isLoading => _isLoading;
+
+  bool get cityHasRestaurants => _cityHasRestaurants;
 
   set searchResult(SearchData result) => _searchResult = result;
 
@@ -17,6 +20,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> getRestaurants() async {
     _restaurants.clear();
     _isLoading = true;
+    _cityHasRestaurants = true;
     notifyListeners();
 
     Map<String, dynamic> body = {
@@ -26,6 +30,8 @@ class HomeProvider extends ChangeNotifier {
     var data = await Services.restaurants(body);
     if (data.status) {
       _restaurants = data.data;
+    } else {
+      _cityHasRestaurants = false;
     }
     _isLoading = false;
     notifyListeners();

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zomato_clone/constants/navigation.dart';
@@ -43,27 +44,33 @@ class _SearchState extends State<Search> {
           return;
         },
         child: Consumer<SearchProvider>(
-          builder: (context, provider, child) => ListView.separated(
-              separatorBuilder: (context, index) {
-                return Divider(height: 1, color: Colors.grey);
-              },
-              itemBuilder: (context, index) {
-                var result = _searchProvider.searchResults[index];
-                return ListTile(
-                  onTap: () => Navigate.close<SearchData>(context, result),
-                  title: Text('${result.name} ${result.stateCode}',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black)),
-                  subtitle: Text('${result.countryName}',
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54)),
-                );
-              },
-              itemCount: _searchProvider.searchResults.length),
+          builder: (context, provider, child) {
+            if (provider.isLoading) {
+              return Center(child: CupertinoActivityIndicator());
+            } else {
+              return ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Divider(height: 1, color: Colors.grey);
+                  },
+                  itemBuilder: (context, index) {
+                    var result = _searchProvider.searchResults[index];
+                    return ListTile(
+                      onTap: () => Navigate.close<SearchData>(context, result),
+                      title: Text('${result.name} ${result.stateCode}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      subtitle: Text('${result.countryName}',
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black54)),
+                    );
+                  },
+                  itemCount: _searchProvider.searchResults.length);
+            }
+          },
         ),
       ),
     );

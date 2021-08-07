@@ -29,6 +29,7 @@ class _HomeState extends State<Home> with PostFrameCallBack<Home> {
 
   @override
   Widget build(BuildContext context) {
+    var result;
     return Scaffold(
       appBar: appBar(
         context: context,
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> with PostFrameCallBack<Home> {
           iconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
-              var result = await Navigate.to<SearchData>(context, Search());
+              result = await Navigate.to<SearchData>(context, Search());
               if (result != null) {
                 _homeProvider.searchResult = result;
                 _homeProvider.getRestaurants();
@@ -65,11 +66,19 @@ class _HomeState extends State<Home> with PostFrameCallBack<Home> {
           return;
         },
         child: Consumer<HomeProvider>(
-          builder: (context, provider, child) => ListView.builder(
-              itemBuilder: (context, index) {
-                return _card(_homeProvider.restaurants[index]);
-              },
-              itemCount: _homeProvider.restaurants.length),
+          builder: (context, provider, child) {
+            if (!provider.cityHasRestaurants) {
+              return Center(
+                  child: Text(
+                      "No restaurants found in ${result?.name ?? ''} :(",
+                      style: TextStyle(fontSize: 14.0.sp)));
+            }
+            return ListView.builder(
+                itemBuilder: (context, index) {
+                  return _card(_homeProvider.restaurants[index]);
+                },
+                itemCount: _homeProvider.restaurants.length);
+          },
         ),
       ),
     );
