@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       ],
       child: ScreenUtilInit(
           builder: () => MaterialApp(
-                title: APP_NAME,
+                title: kAPP_NAME,
                 theme: ThemeData(
                     primarySwatch: Palette.primaryColor,
-                    fontFamily: QUICKSANDS_MEDIUM),
+                    fontFamily: kQUICKSANDS_FONT_FAMILY),
                 debugShowCheckedModeBanner: false,
                 home: Home(),
               )),

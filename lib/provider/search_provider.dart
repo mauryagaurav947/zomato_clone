@@ -18,7 +18,7 @@ class SearchProvider extends ChangeNotifier {
     _searchResults.clear();
     _isLoading = true;
     notifyListeners();
-    var data = await Services.searchCities({'q': value});
+    var data = await Services.citySuggestion({'q': value});
     if (data.status) {
       _searchResults = data.data;
     }

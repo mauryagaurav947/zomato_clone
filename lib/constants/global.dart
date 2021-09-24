@@ -5,25 +5,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'constants.dart';
 
 // Application name
-const String APP_NAME = 'ZOMATO CLONE';
+const String kAPP_NAME = 'ZOMATO CLONE';
 
 // Text fields mandatory char
-const String mandatoryChar = "*";
+const String kMandatoryChar = "*";
 
 // Regular font
-const String QUICKSANDS_REGULAR = 'Quicksand-Regular';
-
-// Bold font
-const String QUICKSANDS_BOLD = 'Quicksand-Bold';
-
-// light font
-const String QUICKSANDS_LIGHT = 'Quicksand-Light';
-
-// medium font
-const String QUICKSANDS_MEDIUM = 'Quicksand-Medium';
-
-// semi bold font
-const String QUICKSANDS_SEMI_BOLD = 'Quicksand-SemiBold';
+const String kQUICKSANDS_FONT_FAMILY = 'Quicksand';
 
 Future<bool> showToast(String msg, {Toast toastLength = Toast.LENGTH_LONG}) {
   if (msg?.isNotEmpty == true) {

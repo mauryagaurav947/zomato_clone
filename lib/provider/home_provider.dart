@@ -27,7 +27,7 @@ class HomeProvider extends ChangeNotifier {
       'entity_type': 'city',
       'entity_id': _searchResult?.id ?? ''
     };
-    var data = await Services.restaurants(body);
+    var data = await Services.searchRestaurants(body);
     if (data.status) {
       _restaurants = data.data;
     } else {
